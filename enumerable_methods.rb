@@ -36,4 +36,21 @@ module Enumerable
         my_each { |x| counter += 1 }
         counter
     end
+
+    def my_map
+        output = []
+        my_each { |x| output << yield(x) }
+        output
+    end
+
+    def my_inject
+        memo = self[0]
+        self[1..-1].my_each { |x| memo = yield(memo, x) }
+        memo
+    end
+
+    
+end
+def multiply_els(arr)
+    arr.my_inject { |res, x| res * x }
 end
